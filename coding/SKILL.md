@@ -157,3 +157,7 @@ Organize code into modules, where each module has its own well defined role with
 * A good rule of thumb is that any given function should only ever have to use objects that are in the same module as itself (or a submodule of itself)
 * Avoid creating 'junk drawer' modules, such as a `utils` file or a `misc/` module
 * Try to keep folder depth shallow.
+
+## Git hygiene
+
+Never stage, commit, or push any code.
