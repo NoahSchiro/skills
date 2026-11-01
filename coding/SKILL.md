@@ -158,6 +158,24 @@ Organize code into modules, where each module has its own well-defined role with
 * Avoid creating 'junk drawer' modules, such as a `utils` file or a `misc/` module.
 * Try to keep folder depth shallow.
 
+## Environment Parity
+
+Keep development, staging, and production as similar as possible. Bugs come from drift between environments.
+
+* Pin versions everywhere. Lock language runtimes, dependencies, and system packages. Avoid latest.
+* Use the same backing services. Run the same database engine and major version locally that runs in production. Don’t use SQLite in dev and Postgres in prod, or an in-memory queue where prod uses a real broker.
+* Containerize the environment with docker.
+* Configure through the environment. Keep config in env vars or a config layer, not in code branches like if `env == "prod"`. The same build artifact should run in every environment with only config changing.
+* Minimize environment-specific code paths. If it is unavoidable, document why
+* Make CI mirror production. Run tests in the same image and against the same services used in deployment.
+* Document intentional differences. Some gaps are unavoidable, such as scale, secrets, and data volume.
+
+When writing or reviewing code, check:
+
+Does this rely on something only present on one environment (a local file path, an installed tool, a particular OS)?
+Would this behave differently under production’s version of a dependency or service?
+Is any behavior gated on an environment name instead of explicit config?
+
 ## Git hygiene
 
 Never stage, commit, or push any code.
