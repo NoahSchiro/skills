@@ -48,12 +48,12 @@ Given a task, this is how to approach coding it:
 For a long time, programmers have preferred "pure" over "impure" functions. While pure functions have nice properties and are generally preferred, their definition is slightly restrictive. Instead we prefer *honest* over *dishonest* functions.
 
 Honest functions:
-* **Have a clear signature.** The signature should completely represent the inputs and outputs of the function.
+* **Have a clear signature.** The signature should completely represent the inputs and outputs of the function. Ideally, the function name, the input and output names / types are so clear that a user need not look at the logic or docstring to understand what a function does.
 * **Are deterministic.**
-* **Are a superset of pure functions.** All pure functions are honest about what they take in (in the function signature), what they return (in the function signature), what state they rely on (all local state), and what state they mutate (none, at least not state external to the function). They abide by local reasoning.
+* **Abide by local reasoning.** That is, the logic of a function is completely understandable just by looking at that function.
+* **Are a superset of pure functions.** All pure functions are honest about what they take in (in the function signature), what they return (in the function signature), what state they rely on (all local state), and what state they mutate (none, at least not state external to the function).
 * **Are allowed to mutate.** Mutation is okay, so long as the function is clear about what it is mutating (in the function signature). Think, for instance, `my_arr.clear()` or `my_arr.sort()` or `my_arr<T>.filter(func(T) -> Bool)`. These functions are technically 'impure,' but that is okay as long as we can still reason about what the function is doing and what it is acting upon. Note that this mutation is still deterministic.
 * **Are testable.**
-* **Use local reasoning.**
 
 Dishonest functions:
 * **Are not deterministic.**
